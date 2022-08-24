@@ -1,0 +1,33 @@
+
+<div>
+  <input type="text" name="serach" [(ngModel)]="searchText" placeholder="search here">
+</div>
+<div>
+<table class="table table-striped text-center" id="table">
+  <tr>
+      <th>orderid</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Created time</th>
+      <th>Updated time</th>
+
+  </tr>
+  <tr *ngFor="let orders of order | filter:searchText">
+      <td>{{orders.order_id}}</td>
+      <td>{{orders.buyer_email}}</td>
+     <td>{{orders.buyer_phone}}</td>
+     <td>{{orders.buyer_address}}</td>
+     <td>{{orders.orderAmount|currency:'INR'}}</td>
+     <td>{{orders.order_status== 1 ? 'Delivered' : 'In Progress'}}</td>
+     <td>{{orders.create_time|date:"dd-MM-yy"}}</td>
+     <td>{{orders.update_time|date:"dd-MM-yy"}}</td>
+  </tr>
+</table>
+</div>
+
+<div>
+<input type="button" value="GeneratePDF" (click)="convetToPDF()" class="btn btn-success"/>
+</div>

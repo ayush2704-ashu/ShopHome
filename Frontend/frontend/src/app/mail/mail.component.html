@@ -1,0 +1,18 @@
+<div class="col-auto form-row align-items-center">
+  <div>
+    <form #emailRef="ngForm" (ngSubmit)="sendEmail(emailRef)">
+        <label class="form-label">To: </label>
+        <input type="text" name="email" ngModel class="form-control mb2 col-xs-4"><br>
+        <label class="form-label">Subject: </label>
+        <input type="text" name="subject" ngModel class="form-control mb2 col-xs-4"><br>
+        <label class="form-label">Body: </label>
+        <input type="text" name="body" ngModel class="form-control mb2 col-xs-4"><br>
+        <br><br>
+          <div>
+            <input type="submit" value="Send Email" class="btn btn-success form-control mb2 col-xs-4" style="margin: 10px;"><br>
+            <input type="reset" value="reset" class="btn btn-info form-control col-xs-4" style="margin: 10px;"><br> 
+         </div>
+        <p style="color: green;font-size: 20px;">{{storeMsg}}</p>
+    </form>
+  </div>
+</div>

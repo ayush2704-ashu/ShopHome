@@ -1,0 +1,52 @@
+<h1 align="center" class="display-4 mb-5"><u>ORDERS</u></h1>
+
+<table class="table table-striped text-center" id ="table">
+    <thead>
+    <tr>
+        <th scope="col">ORDER</th>
+        <th scope="col">CUSTOMER NAME</th>
+        <th scope="col">CUSTOMER EMAIL</th>
+        <th scope="col">PHONE NUMBER</th>
+        <th scope="col">SHIPPING ADDRESS</th>
+        <th scope="col">TOTAL AMOUNT</th>
+        <th scope="col">ORDER DATE</th>
+        <th scope="col">STATUS</th>
+        <th scope="col">ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let order of page?.content">
+        <th class="align-middle" scope="row">
+            {{order.orderId}}
+        </th>
+        <td class="align-middle">{{order.buyerName}}</td>
+        <td class="align-middle">{{order.buyerEmail}}</td>
+        <td class="align-middle">{{order.buyerPhone}}</td>
+        <td class="align-middle">{{order.buyerAddress}}</td>
+        <td class="align-middle">{{order.orderAmount | currency:'INR'}}</td>
+        <td class="align-middle">{{order.createTime | date}}</td>
+        <td class="align-middle">{{OrderStatus[order.orderStatus]}}</td>
+        <td class="align-middle">
+            <a *ngIf="!(currentUser.role == Role.Customer && currentUser.name == order.buyerEmail)"
+               style="display:
+            block" href="" routerLink="/order/{{order.orderId}}">
+                Show</a>
+            <a *ngIf="order.orderStatus == 0" style="display: block" (click)="cancel(order)" routerLink="./">Cancel</a>
+            <a *ngIf="currentUser.role != Role.Customer && order.orderStatus == 0"
+               style="display: block"
+               (click)="finish(order)"
+               routerLink="./">
+                Finish</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- <div>
+    <input *ngIf="currentUser.role != Role.Customer" type="button" class="button" value="Generate Report" (click)="convetToPDF()"/>
+</div> -->
+<div>
+    <a *ngIf="currentUser.role != Role.Customer" [routerLink]="['/report']" style="color: red;font-size: 20px ;text-decoration: none;">Generate Report</a>
+</div>
+
+<app-pagination [currentPage]="page"></app-pagination>

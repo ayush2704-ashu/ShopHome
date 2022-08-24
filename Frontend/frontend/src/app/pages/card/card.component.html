@@ -1,0 +1,92 @@
+<div id="slider">
+  <input type="radio" name="slider" id="slide1" checked>
+  <input type="radio" name="slider" id="slide2">
+  <input type="radio" name="slider" id="slide3">
+  <input type="radio" name="slider" id="slide4">
+  <div id="slides">
+     <div id="overflow">
+        <div class="inner">
+           <div class="slide slide_1">
+              <div class="slide-content">
+                <img src="/assets/slide1.png" alt="Logo">
+              </div>
+           </div>
+           <div class="slide slide_2">
+              <div class="slide-content">
+                <img src="/assets/slide2.png" alt="Logo">
+              </div>
+           </div>
+           <div class="slide slide_3">
+              <div class="slide-content">
+                <img src="/assets/slide3.png" alt="Logo">
+              </div>
+           </div>
+           <div class="slide slide_4">
+              <div class="slide-content">
+                <img src="/assets/slide4.png" alt="Logo">
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div id="controls">
+     <label for="slide1"></label>
+     <label for="slide2"></label>
+     <label for="slide3"></label>
+     <label for="slide4"></label>
+  </div>
+  <div id="bullets">
+     <label for="slide1"></label>
+     <label for="slide2"></label>
+     <label for="slide3"></label>
+     <label for="slide4"></label>
+  </div>
+</div>
+<div>
+<h1 align="center" class="display-4 mb-5">{{title}}</h1>
+
+<!--<div align="right" class="input-group">
+    <div class="form-outline">
+       
+      <input  type="search"  id="form1"  name="search" [(ngModel)]="searchText" placeholder ="Search" class="form-control" />
+      <label class="form-label" for="form1">Search</label> 
+    </div>-->
+    <!-- <input type = "text" align="left" name="search" [(ngModel)]="searchText" placeholder ="Search Here" class="display-4 mb-5" />
+    <i class="fa fa-search search-btn"></i> -->
+    <nav class="navbar navbar-light bg-light">
+      <!-- <a class="navbar-brand mr-auto"><img src="https://res.cloudinary.com/dqdlpjyhw/image/upload/v1657624689/WhatsApp_Image_2022-07-12_at_4.45.39_PM_zvivik.jpg" class="logo-image"></a> -->
+      <form class="form-inline">
+       
+        <input type = "text" class="form-danger  mr-2 p-3" name="search" [(ngModel)]="searchText" placeholder ="Door to happines open with search...." aria-label="Search...." />
+        <!-- <button class="btn btn-outline-info my-2 my-sm-0 p-2" type="text">Search</button> -->
+      </form>
+    </nav>
+</div>
+ 
+
+<div class="row card-deck text-center">
+
+    
+ 
+
+  <div *ngFor="let productInfo of page?.content | filter:searchText" class="col-lg-4 ">
+    <div class="card border-info mb-4"  >
+      <img height="50%" class="card-img-top" src="{{productInfo.productIcon}}" alt="{{productInfo.productName}}">
+      <div class="card-body">
+        <h4 class="card-title ">{{productInfo.productName}}</h4>
+        
+        <div class="text-left">
+          <p class="card-test"><strong>Description: </strong>{{productInfo.productDescription}}</p>
+          <p class="card-text"><strong>Price: </strong>{{productInfo.productPrice | currency:'INR'}}</p>
+          <p class="card-text"><strong>Available stock: </strong>{{productInfo.productStock}}</p>
+        </div>
+        <br>
+        <a routerLink="/product/{{productInfo.productId}}" *ngIf="productInfo.productStatus == 0; else offBlock"
+           class="btn btn-primary btn-lg"
+        >Buy</a>
+        <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Unavailable</a></ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<app-pagination  [currentPage]="page" ></app-pagination>
